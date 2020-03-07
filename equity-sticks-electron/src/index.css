@@ -11,3 +11,19 @@
 .section {
   font-size: 20px;
 }
+
+.mt-md {
+  margin-top: 10px!important;
+}
+
+.mr-md {
+  margin-right: 10px!important;
+}
+
+.mt-lg {
+  margin-top: 30px!important;
+}
+
+.p-md {
+  padding: 15px;
+}
