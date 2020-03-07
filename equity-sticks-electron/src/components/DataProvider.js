@@ -21,7 +21,11 @@ class DataProvider extends React.Component {
             ]
         },
         globalData: {
-            "maxTallies": 3
+            "maxTallies": 3,
+            classes: {
+                abc123: "Defense Against The Dark Arts: Period 2",
+                def456: "Biology Honors"
+            }
         }
     };
 
