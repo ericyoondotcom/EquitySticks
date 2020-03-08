@@ -1,4 +1,5 @@
 const electron = require("electron");
+const debug = require("electron-debug");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -6,6 +7,8 @@ const path = require("path");
 const url = require("url");
 
 let mainWindow;
+
+debug();
 
 function createWindow() {
 	mainWindow = new BrowserWindow({ width: 800, height: 600 });

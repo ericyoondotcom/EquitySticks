@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Routes from "./routes";
+import DataProvider from "./DataProvider";
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -14,36 +16,51 @@ class Navbar extends React.Component {
     render() {
         const {activeItem} = this.props;
         return (
-            <div>
-                <Menu>
-                    <Link to={Routes.classes}>
-                        <Menu.Item
-                            name='My Classes'
-                            active={activeItem === "classes"}
-                        >
-                            My Classes
-                        </Menu.Item>
-                    </Link>
+			<DataProvider.Consumer>
+				{
+					dataCtx => {
+						const {currentClass, classes, preferences, changeClass } = dataCtx;
 
-                    <Link to={Routes.tally}>
-                        <Menu.Item
-                            name='Tally'
-                            active={activeItem === "classes"}
-                        >
-                            Tally
-                        </Menu.Item>
-                    </Link>
+						return (
+							<div>
+								<Menu>
+									<Link to={Routes.classes}>
+										<Menu.Item
+											name='My Classes'
+											active={activeItem === "classes"}
+										>
+											My Classes
+										</Menu.Item>
+									</Link>
+									{
+										currentClass != null ? (
+											<div style={{display: "flex"}}>
+												<Link to={Routes.tally}>
+													<Menu.Item
+														name='Tally'
+														active={activeItem === "classes"}
+													>
+														Tally
+													</Menu.Item>
+												</Link>
 
-                    <Link to={Routes.edit}>
-                        <Menu.Item
-                            name='Edit'
-                            active={activeItem === "classes"}
-                        >
-                            Edit Class
-                        </Menu.Item>
-                    </Link>
-                </Menu>
-            </div>
+												<Link to={Routes.edit}>
+													<Menu.Item
+														name='Edit'
+														active={activeItem === "classes"}
+													>
+														Edit Class
+													</Menu.Item>
+												</Link>
+											</div>
+										) : null
+									}
+								</Menu>
+							</div>
+						);
+					}
+				}
+			</DataProvider.Consumer>
         );
     }
 }
