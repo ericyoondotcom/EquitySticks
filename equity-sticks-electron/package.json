@@ -5,12 +5,33 @@
   "homepage": "./",
   "main": "src/start.js",
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+    "appId": "com.yoonicode.equitysticks",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     },
-    "directories": {
-      "buildResources": "public"
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel"
     }
   },
   "dependencies": {
@@ -18,7 +39,6 @@
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
     "browserify-fs": "^1.0.0",
-    "electron": "^8.0.2",
     "electron-debug": "^3.0.1",
     "fs": "0.0.1-security",
     "object-path": "^0.11.4",
@@ -38,8 +58,9 @@
     "electron": "electron .",
     "electron-start": "node src/start-react",
     "react-start": "BROWSER=none react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
+    "build-electron": "cp src/start.js build/start.js",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build && npm run build-electron && electron-builder build --mac --win -c.extraMetadata.main=build/start.js --publish never",
     "postinstall": "install-app-deps"
   },
   "eslintConfig": {
@@ -58,7 +79,9 @@
     ]
   },
   "devDependencies": {
-    "electron-builder": "^22.3.2",
+    "electron": "^8.1.0",
+    "electron-builder": "^22.4.0",
+    "electron-builder-squirrel-windows": "^22.4.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.1",
