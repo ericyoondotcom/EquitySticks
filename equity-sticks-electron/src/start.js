@@ -8,10 +8,15 @@ const url = require("url");
 
 let mainWindow;
 
-debug();
-
 function createWindow() {
-	mainWindow = new BrowserWindow({ width: 800, height: 600 });
+	mainWindow = new BrowserWindow({
+		width: 800,
+		height: 600,
+		webPreferences: {
+			nodeIntegration: true
+		}
+	});
+	debug();
 
 	mainWindow.loadURL(
 		process.env.ELECTRON_START_URL ||

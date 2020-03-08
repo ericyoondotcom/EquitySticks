@@ -44,8 +44,9 @@ export default class TallyPage extends React.Component {
 					{
 						dataCtx => {
 							const {currentClass, classes, preferences, editClass } = dataCtx;
-							if(!(currentClass in classes) || currentClass == null){
+							if(currentClass == null || !(currentClass in classes)){
 								window.location.href = "/#" + Routes.classes;
+								return;
 							}
 							const classData = classes[currentClass];
 

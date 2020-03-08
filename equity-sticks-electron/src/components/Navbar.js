@@ -55,6 +55,14 @@ class Navbar extends React.Component {
 											</div>
 										) : null
 									}
+									<Link to={Routes.settings}>
+										<Menu.Item
+											name='Settings'
+											active={activeItem === "settings"}
+										>
+											Settings
+										</Menu.Item>
+									</Link>
 								</Menu>
 							</div>
 						);

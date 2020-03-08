@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import { Header, Button, Container, Label, Popup, Segment } from "semantic-ui-react";
+import { Header, Button, Container, Label, Popup, Segment, Message, Icon } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
@@ -59,6 +59,11 @@ class ClassesPage extends React.Component {
 															"firstName": "Aariz",
 															"lastName": "Irfan",
 															"tallies": 0
+														},
+														{
+															"firstName": "Rick",
+															"lastName": "Astley",
+															"tallies": 0
 														}
 													]
 												});
@@ -68,6 +73,19 @@ class ClassesPage extends React.Component {
 											New class
 										</Popup>
 									</Segment>
+									{
+										Object.keys(classes).length == 0 ?
+										(
+											<Message
+												icon="lightbulb"
+												header="You have no classes"
+												info
+												content={
+													<span>Add a class with the <Icon name="plus" /> button to get started!</span>
+												}
+											/>
+										) : null
+									}
 								</Container>
 							);
 						}

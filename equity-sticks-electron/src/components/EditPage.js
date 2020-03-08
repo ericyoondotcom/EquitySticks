@@ -28,6 +28,7 @@ class EditPage extends React.Component {
 								window.location.href = "/#" + Routes.classes;
 								return;
 							}
+							
 							const classData = classes[currentClass];
 							if(this.state.studentsData.length == 0){
 								this.setState({studentsData: classData.students});
@@ -111,8 +112,8 @@ class EditPage extends React.Component {
 										<Button icon="add" content="Add Student" color={classData.color} labelPosition="left" onClick={() => {
 											const newData = this.state.studentsData;
 											newData.push({
-												"firstName": "Rick",
-												"lastName": "Astley",
+												"firstName": "",
+												"lastName": "",
 												"tallies": 0
 											});
 											this.setState({studentsData: newData});

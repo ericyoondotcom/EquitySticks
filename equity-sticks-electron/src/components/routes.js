@@ -1,7 +1,8 @@
 const Routes = {
     tally: "/tally",
     edit: "/edit",
-    classes: "/classes"
+	classes: "/classes",
+	settings: "/settings"
 };
 
 export default Routes;

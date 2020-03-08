@@ -1,39 +1,34 @@
 import React from "react";
 import objectPath from "object-path";
+import path from "path";
+const electron = window.require("electron"); //https://github.com/electron/electron/issues/7300
+const remote = electron.remote;
+const fs = remote.require('fs');
 
 const { Provider, Consumer } = React.createContext();
 
 class DataProvider extends React.Component {
-	state = {
-		currentClass: null,
-		classes: {
-			"1-4ugi578gj4e86thf74": {
-				displayName: "Defense Against the Dark Arts: Period 2",
-				color: "olive",
-				students: [
-					{
-						"firstName": "Timmothy",
-						"lastName": "Westlake",
-						"tallies": 0
-					},
-					{
-						"firstName": "Jimmothy",
-						"lastName": "Harvard",
-						"tallies": 1
-					},
-					{
-						"firstName": "Johnny",
-						"lastName": "Teststudent",
-						"tallies": 3
-					}
-				]
-			}
-		},
-		preferences: {
-			idIncrementor: 2,
-			maxTallies: 3
+	constructor(props){
+		super(props);
+		const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+		this.path = path.join(userDataPath, "equitysticks_userdat.json");
+		
+		try {
+			const file = fs.readFileSync(this.path);
+			this.state = JSON.parse(file);
+			this.state.currentClass = null;
+		} catch(e) {
+			console.error(e);
+			this.state = {
+				currentClass: null,
+				classes: {},
+				preferences: {
+					idIncrementor: 2,
+					maxTallies: 3
+				}
+			};
 		}
-	};
+	}
 
 	changeClass = (newClass, callback) => {
 		this.setState({currentClass: newClass}, callback);
@@ -43,11 +38,29 @@ class DataProvider extends React.Component {
 		const newClasses = Object.assign(this.state.classes);
 		newClasses[id] = data;
 		this.setState({classes: newClasses}, callback);
+		this.saveData();
 	}
 	editPrefs = (prefId, newData) => {
 		const newPrefs = Object.assign(this.state.preferences);
 		newPrefs[prefId] = newData;
 		this.setState({preferences: newPrefs});
+		this.saveData();
+	}
+
+	deleteClass = (id) => {
+		const newClasses = Object.assign(this.state.classes);
+		delete newClasses.id
+		this.setState({classes: newClasses});
+		this.saveData();
+	}
+
+	saveData = () => {
+		fs.writeFile(this.path, JSON.stringify({
+			classes: this.state.classes,
+			preferences: this.state.preferences
+		}), () => {
+			console.log("Data save success!");
+		});
 	}
 
 	render() {
@@ -59,7 +72,8 @@ class DataProvider extends React.Component {
 					preferences: this.state.preferences,
 					changeClass: this.changeClass,
 					editClass: this.editClass,
-					editPrefs: this.editPrefs
+					editPrefs: this.editPrefs,
+					deleteClass: this.deleteClass
 				}}
 			>
 				{this.props.children}
