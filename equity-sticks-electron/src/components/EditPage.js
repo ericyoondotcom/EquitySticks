@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import { Button, Header, Container, Form, Input, List, Icon } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Icon, Popup } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
@@ -11,7 +11,8 @@ class EditPage extends React.Component {
 		super(props);
 		this.state = {
 			studentsData: [],
-			loading: false
+			loading: false,
+			newNameText: ""
 		};
 	}
 
@@ -45,8 +46,28 @@ class EditPage extends React.Component {
 									<UploadInstructions trigger={
 										<Button labelPosition="left" icon="upload" color={classData.color} content="Import Data" />
 									} />
-									<Button labelPosition="left" icon="pencil" content="Edit Name" />
-									<Button labelPosition="left" icon="tint" content="Change Color" />
+									<Popup on="click" wide="very" trigger={
+										<Button labelPosition="left" icon="pencil" content="Edit Name" onClick={() => {
+											this.setState({newNameText: classData.displayName});
+										}} />
+									}>
+										<Input value={this.state.newNameText} labelPosition="right" label={
+											<Button positive icon="save" onClick={() => {
+												const newData = Object.assign(classData);
+												newData.displayName = this.state.newNameText;
+												editClass(currentClass, newData, () => {
+													
+												});
+											}} />
+										} onChange={(e, d) => {
+											this.setState({newNameText: d.value});
+										}} />
+									</Popup>
+									<Popup on="click" wide="very" trigger={
+										<Button labelPosition="left" icon="tint" content="Change Color" />
+									}>
+										Not implemented!
+									</Popup>
 
 									<Header as="h2" className="mt-lg">Students</Header>
 
