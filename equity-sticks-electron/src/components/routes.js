@@ -1,6 +1,6 @@
 const Routes = {
-    tally: "/tally",
-    edit: "/edit",
+	tally: "/tally",
+	edit: "/edit",
 	classes: "/classes",
 	settings: "/settings"
 };

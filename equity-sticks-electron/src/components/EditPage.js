@@ -1,6 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
-import { Button, Header, Container, Form, Input, List, Icon, Popup } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Popup } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
@@ -23,9 +22,9 @@ class EditPage extends React.Component {
 				<DataProvider.Consumer>
 					{
 						dataCtx => {
-							const {currentClass, classes, preferences, editClass } = dataCtx;
+							const {currentClass, classes, editClass } = dataCtx;
 							if(currentClass == null || !(currentClass in classes)){
-								window.location.href = "/#" + Routes.classes;
+								window.location.href = "#" + Routes.classes;
 								return;
 							}
 							
@@ -77,7 +76,7 @@ class EditPage extends React.Component {
 										{
 											this.state.studentsData.map((student, i) => {
 												return (
-													<List.Item as="li">
+													<List.Item as="li" key={"student-" + i}>
 														<Form>
 															<Form.Group widths="equal">
 																<Form.Input

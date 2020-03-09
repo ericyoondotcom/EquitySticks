@@ -12,11 +12,22 @@ Project created following [this guide](https://flaviocopes.com/react-electron/)
 In the project directory, you can run:
 
 ### `npm start`
-
 Starts the Electron app with hot reloading.
 
+### `npm run deploy`
+Simple script to build, build-electron, and dist.
+
+### `npm run build`
+Builds the react app to the `/build` folder.
+
+### `npm run build-electron`
+Copies static files to the `/build` folder.
+
+### `npm run pack`
+Builds out the app without packaging it, useful for testing building
+
 ### `npm run dist`
-Packages the Electron app for distribution.
+Packages app for distribution.
 
 ### `npm test`
 

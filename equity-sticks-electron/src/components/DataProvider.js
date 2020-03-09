@@ -1,16 +1,16 @@
 import React from "react";
-import objectPath from "object-path";
 import path from "path";
+import PropTypes from "prop-types";
 const electron = window.require("electron"); //https://github.com/electron/electron/issues/7300
 const remote = electron.remote;
-const fs = remote.require('fs');
+const fs = remote.require("fs");
 
 const { Provider, Consumer } = React.createContext();
 
 class DataProvider extends React.Component {
 	constructor(props){
 		super(props);
-		const userDataPath = (electron.app || electron.remote.app).getPath('userData');
+		const userDataPath = (electron.app || electron.remote.app).getPath("userData");
 		this.path = path.join(userDataPath, "equitysticks_userdat.json");
 		
 		try {
@@ -49,7 +49,7 @@ class DataProvider extends React.Component {
 
 	deleteClass = (id) => {
 		const newClasses = Object.assign(this.state.classes);
-		delete newClasses.id
+		delete newClasses.id;
 		this.setState({classes: newClasses});
 		this.saveData();
 	}
@@ -81,5 +81,9 @@ class DataProvider extends React.Component {
 		);
 	}
 }
+
+DataProvider.propTypes = {
+	children: PropTypes.object
+};
 
 export default {DataProvider, Consumer};

@@ -1,6 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
-import { Button, Header, Container, Icon, Rating, Label, Table } from "semantic-ui-react";
+import { Button, Header, Container, Icon, Table } from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import DataProvider from "./DataProvider";
 import Navbar from "./Navbar";
@@ -45,7 +44,7 @@ export default class TallyPage extends React.Component {
 						dataCtx => {
 							const {currentClass, classes, preferences, editClass } = dataCtx;
 							if(currentClass == null || !(currentClass in classes)){
-								window.location.href = "/#" + Routes.classes;
+								window.location.href = "#" + Routes.classes;
 								return;
 							}
 							const classData = classes[currentClass];

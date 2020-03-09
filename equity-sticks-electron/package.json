@@ -1,91 +1,110 @@
 {
-  "name": "equity-sticks-electron",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "./",
-  "main": "src/start.js",
-  "build": {
-    "appId": "com.yoonicode.equitysticks",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*"
-    ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
-    "win": {
-      "target": "squirrel"
-    }
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "browserify-fs": "^1.0.0",
-    "electron-debug": "^3.0.1",
-    "fs": "0.0.1-security",
-    "object-path": "^0.11.4",
-    "path": "^0.12.7",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
-  },
-  "scripts": {
-    "start": "nf start -p 3000",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-start": "node src/start-react",
-    "react-start": "BROWSER=none react-scripts start",
-    "build-electron": "cp src/start.js build/start.js",
-    "pack": "electron-builder --dir",
-    "dist": "npm run build && npm run build-electron && electron-builder build --mac --win -c.extraMetadata.main=build/start.js --publish never",
-    "postinstall": "install-app-deps"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "electron": "^8.1.0",
-    "electron-builder": "^22.4.0",
-    "electron-builder-squirrel-windows": "^22.4.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.18.3"
-  }
+	"name": "equity-sticks-electron",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": "./",
+	"main": "src/start.js",
+	"author": {
+		"name": "Harvard-Westlake",
+		"url": "https://hw.com"
+	},
+	"contributors": [
+		{
+			"name": "Eric Yoon",
+			"email": "eric@yoonicode.com",
+			"url": "http://yoonicode.com"
+		},
+		{
+			"name": "Aariz Irfan",
+			"email": "aarizirf@gmail.com",
+			"url": "https://aarizirfan.com"
+		}
+	],
+	"build": {
+		"appId": "com.yoonicode.equitysticks",
+		"productName": "Equity Sticks",
+		"files": [
+			"build/**/*",
+			"node_modules/**/*"
+		],
+		"dmg": {
+			"contents": [
+				{
+					"x": 110,
+					"y": 150
+				},
+				{
+					"x": 240,
+					"y": 150,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+		"linux": {
+			"target": [
+				"AppImage",
+				"deb"
+			]
+		},
+		"win": {
+			"target": "nsis",
+			"icon": "build/icon_windows.ico"
+		}
+	},
+	"dependencies": {
+		"@testing-library/jest-dom": "^4.2.4",
+		"@testing-library/react": "^9.4.1",
+		"@testing-library/user-event": "^7.2.1",
+		"browserify-fs": "^1.0.0",
+		"electron-debug": "^3.0.1",
+		"fs": "0.0.1-security",
+		"object-path": "^0.11.4",
+		"path": "^0.12.7",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"react-router-dom": "^5.1.2",
+		"react-scripts": "3.4.0",
+		"semantic-ui-css": "^2.4.1",
+		"semantic-ui-react": "^0.88.2"
+	},
+	"scripts": {
+		"start": "nf start -p 3000",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"electron": "electron .",
+		"electron-start": "node src/start-react",
+		"react-start": "BROWSER=none react-scripts start",
+		"build-electron": "cp src/start.js build/start.js && cp src/icon_windows.ico build/icon_windows.ico",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder build --mac --win -c.extraMetadata.main=build/start.js",
+		"deploy": "npm run build && npm run build-electron && npm run dist",
+		"postinstall": "install-app-deps"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"electron": "^8.1.0",
+		"electron-builder": "^22.4.0",
+		"electron-builder-squirrel-windows": "^22.4.0",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-react": "^7.18.3"
+	}
 }

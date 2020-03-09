@@ -28,9 +28,9 @@ class ClassesPage extends React.Component {
 										Object.keys(classes).map(classId => {
 											const classData = classes[classId];
 											return (
-												<Button fluid color={classData.color} inverted={currentClass !== classId} style={{marginBottom: "10px"}} onClick={() => {
+												<Button key={"classbtn-" + classId} fluid color={classData.color} inverted={currentClass !== classId} style={{marginBottom: "10px"}} onClick={() => {
 													changeClass(classId, () => {
-														window.location.href = "/#" + Routes.tally;
+														window.location.href = "#" + Routes.tally;
 													});
 												}}>
 													<Header
@@ -75,16 +75,16 @@ class ClassesPage extends React.Component {
 									</Segment>
 									{
 										Object.keys(classes).length == 0 ?
-										(
-											<Message
-												icon="lightbulb"
-												header="You have no classes"
-												info
-												content={
-													<span>Add a class with the <Icon name="plus" /> button to get started!</span>
-												}
-											/>
-										) : null
+											(
+												<Message
+													icon="lightbulb"
+													header="You have no classes"
+													info
+													content={
+														<span>Add a class with the <Icon name="plus" /> button to get started!</span>
+													}
+												/>
+											) : null
 									}
 								</Container>
 							);

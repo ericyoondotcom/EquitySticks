@@ -2,24 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
-import {Menu} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import { Menu } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 
 class Navbar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 
 
-    render() {
-        const {activeItem} = this.props;
-        return (
+	render() {
+		const { activeItem } = this.props;
+		return (
 			<DataProvider.Consumer>
 				{
 					dataCtx => {
-						const {currentClass, classes, preferences, changeClass } = dataCtx;
+						const { currentClass } = dataCtx;
 
 						return (
 							<div>
@@ -34,7 +34,7 @@ class Navbar extends React.Component {
 									</Link>
 									{
 										currentClass != null ? (
-											<div style={{display: "flex"}}>
+											<div style={{ display: "flex" }}>
 												<Link to={Routes.tally}>
 													<Menu.Item
 														name='Tally'
@@ -69,12 +69,12 @@ class Navbar extends React.Component {
 					}
 				}
 			</DataProvider.Consumer>
-        );
-    }
+		);
+	}
 }
 
 Navbar.propTypes = {
-    activeItem: PropTypes.string
+	activeItem: PropTypes.string
 };
 
 export default Navbar;
