@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Form, Input, List, Popup } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Popup, Icon } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
@@ -22,7 +22,7 @@ class EditPage extends React.Component {
 				<DataProvider.Consumer>
 					{
 						dataCtx => {
-							const {currentClass, classes, editClass } = dataCtx;
+							const {currentClass, classes, editClass, deleteClass } = dataCtx;
 							if(currentClass == null || !(currentClass in classes)){
 								window.location.href = "#" + Routes.classes;
 								return;
@@ -68,7 +68,16 @@ class EditPage extends React.Component {
 									}>
 										Not implemented!
 									</Popup>
-
+									<Popup on="click" wide="very" trigger={
+										<Button labelPosition="left" icon="trash alternate" negative content="Delete Class" />
+									} style={{textAlign: "center"}}>
+										<div>
+											<p><b>Are you sure?</b></p>
+											<Button labelPosition="left" negative icon="check" content="Permanently Delete" onClick={() => {
+												deleteClass(currentClass);
+											}} />
+										</div>
+									</Popup>
 									<Header as="h2" className="mt-lg">Students</Header>
 
 									<List as="ol">

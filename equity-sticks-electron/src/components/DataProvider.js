@@ -49,7 +49,7 @@ class DataProvider extends React.Component {
 
 	deleteClass = (id) => {
 		const newClasses = Object.assign(this.state.classes);
-		delete newClasses.id;
+		delete newClasses[id];
 		this.setState({classes: newClasses});
 		this.saveData();
 	}
