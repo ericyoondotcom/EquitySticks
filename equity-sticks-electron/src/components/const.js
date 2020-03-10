@@ -5,3 +5,7 @@ export const rsuiColors = [
 export function getRandomItem(array){
 	return array[Math.floor(Math.random() * array.length)];
 }
+
+export function properCapitalize(item){
+	return item[0].toUpperCase() + item.slice(1);
+}

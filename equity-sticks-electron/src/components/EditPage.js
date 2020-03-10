@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, Header, Container, Form, Input, List, Popup } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Popup, Dropdown } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
 import DataProvider from "./DataProvider";
+import {rsuiColors, properCapitalize} from "./const";
 
 class EditPage extends React.Component {
 	constructor(props) {
@@ -63,11 +64,36 @@ class EditPage extends React.Component {
 											this.setState({newNameText: d.value});
 										}} />
 									</Popup>
-									<Popup on="click" wide="very" trigger={
-										<Button labelPosition="left" icon="tint" content="Change Color" />
-									}>
-										Not implemented!
-									</Popup>
+									<Dropdown
+										text={properCapitalize(classData.color)}
+										icon="tint"
+										floating
+										labeled
+										button
+										className="icon"
+										color={classData.color}
+									>
+										<Dropdown.Menu>
+											<Dropdown.Header icon='tint' content='Change color' />
+											<Dropdown.Divider />
+											{
+												rsuiColors.map((color, i) => {
+													return (
+														<Dropdown.Item
+															key={"dropdown-color-selection-" + color}
+															label={{ color: color, empty: true, circular: true }}
+															text={properCapitalize(color)}
+															onClick={() => {
+																const newData = Object.assign(classData);
+																newData.color = color;
+																editClass(currentClass, newData);
+															}}
+														/>
+													);
+												})
+											}
+										</Dropdown.Menu>
+									</Dropdown>
 									<Popup on="click" wide="very" trigger={
 										<Button labelPosition="left" icon="trash alternate" negative content="Delete Class" />
 									} style={{textAlign: "center"}}>
