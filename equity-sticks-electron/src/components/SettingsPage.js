@@ -1,6 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
-import { Button, Header, Container, Popup, Input } from "semantic-ui-react";
+import { Button, Header, Container, Input } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";

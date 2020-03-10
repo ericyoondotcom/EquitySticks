@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Form, Input, List, Popup, Icon } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Popup } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
@@ -107,6 +107,12 @@ class EditPage extends React.Component {
 																		this.setState({studentsData: newData});
 																	}}
 																/>
+																<Form.Button icon="minus" color="red" inverted circular disabled={this.state.studentsData.length === 1} onClick={() => {
+																	if(this.state.studentsData.length === 1) return;
+																	const newData = this.state.studentsData;
+																	newData.splice(i, 1);
+																	this.setState({studentsData: newData});
+																}} />
 															</Form.Group>
 														</Form>
 													</List.Item>

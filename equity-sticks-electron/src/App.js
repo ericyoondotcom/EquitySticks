@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "semantic-ui-css/semantic.min.css";
 import { HashRouter, Route } from "react-router-dom";
 
@@ -9,7 +8,6 @@ import EditPage from "./components/EditPage";
 import ClassesPage from "./components/ClassesPage";
 import DataProvider from "./components/DataProvider";
 import Routes from "./components/routes";
-import Navbar from "./components/Navbar";
 import SettingsPage from "./components/SettingsPage";
 
 

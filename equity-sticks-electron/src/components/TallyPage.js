@@ -42,7 +42,7 @@ export default class TallyPage extends React.Component {
 				<DataProvider.Consumer>
 					{
 						dataCtx => {
-							const {currentClass, classes, preferences, editClass } = dataCtx;
+							const {currentClass, classes, preferences } = dataCtx;
 							if(currentClass == null || !(currentClass in classes)){
 								window.location.href = "#" + Routes.classes;
 								return;

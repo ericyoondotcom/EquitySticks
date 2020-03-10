@@ -1,6 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
-import { Header, Button, Container, Label, Popup, Segment, Message, Icon } from "semantic-ui-react";
+import { Header, Button, Container, Popup, Segment, Message, Icon } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
@@ -96,8 +95,6 @@ class ClassesPage extends React.Component {
 	}
 }
 
-ClassesPage.propTypes = {
-
-};
+ClassesPage.propTypes = {};
 
 export default ClassesPage;
