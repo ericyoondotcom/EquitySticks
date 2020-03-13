@@ -1,5 +1,5 @@
 export const rsuiColors = [
-	"red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "gray", "black"
+	"red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black"
 ];
 
 export function getRandomItem(array){

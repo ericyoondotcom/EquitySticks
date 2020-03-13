@@ -59,7 +59,7 @@ class DataProvider extends React.Component {
 			classes: this.state.classes,
 			preferences: this.state.preferences
 		}), () => {
-			console.log("Data save success!");
+			
 		});
 	}
 

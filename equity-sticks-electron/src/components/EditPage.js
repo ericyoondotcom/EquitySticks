@@ -44,9 +44,9 @@ class EditPage extends React.Component {
 										subheader={classData.students.length + " student" + (classData.students.length == 1 ? "" : "s")}
 									/>
 
-									<UploadInstructions trigger={
-										<Button labelPosition="left" icon="upload" color={classData.color} content="Import Data" />
-									} />
+									<UploadInstructions classDisplayName={classData.displayName} color={classData.color} onUploadFinished={() => {
+										this.setState({studentsData: []});
+									}} />
 									<Popup on="click" wide="very" trigger={
 										<Button labelPosition="left" icon="pencil" content="Edit Name" onClick={() => {
 											this.setState({newNameText: classData.displayName});
@@ -152,9 +152,9 @@ class EditPage extends React.Component {
 										<Button icon="add" content="Add Student" color={classData.color} labelPosition="left" onClick={() => {
 											const newData = this.state.studentsData;
 											newData.push({
-												"firstName": "",
-												"lastName": "",
-												"tallies": 0
+												firstName: "",
+												lastName: "",
+												tallies: 0
 											});
 											this.setState({studentsData: newData});
 										}} />
