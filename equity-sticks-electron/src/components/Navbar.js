@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
-import { Menu } from "semantic-ui-react";
+import { Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+const {webFrame} = window.require("electron");
 
 
 class Navbar extends React.Component {
@@ -12,6 +13,10 @@ class Navbar extends React.Component {
 		this.state = {};
 	}
 
+	handleZoomClick = (zoomOut) => {
+		const currentZoomFactor = webFrame.getZoomFactor();
+		webFrame.setZoomFactor(currentZoomFactor + (zoomOut ? -0.2 : 0.2));
+	}
 
 	render() {
 		const { activeItem } = this.props;
@@ -23,11 +28,11 @@ class Navbar extends React.Component {
 
 						return (
 							<div>
-								<Menu>
+								<Menu pointing secondary>
 									<Link to={Routes.classes}>
 										<Menu.Item
 											name='My Classes'
-											active={activeItem === "classes"}
+											active={activeItem === Routes.classes}
 										>
 											My Classes
 										</Menu.Item>
@@ -38,7 +43,7 @@ class Navbar extends React.Component {
 												<Link to={Routes.tally}>
 													<Menu.Item
 														name='Tally'
-														active={activeItem === "classes"}
+														active={activeItem === Routes.tally}
 													>
 														Tally
 													</Menu.Item>
@@ -47,7 +52,7 @@ class Navbar extends React.Component {
 												<Link to={Routes.edit}>
 													<Menu.Item
 														name='Edit'
-														active={activeItem === "classes"}
+														active={activeItem === Routes.edit}
 													>
 														Edit Class
 													</Menu.Item>
@@ -58,11 +63,19 @@ class Navbar extends React.Component {
 									<Link to={Routes.settings}>
 										<Menu.Item
 											name='Settings'
-											active={activeItem === "settings"}
+											active={activeItem === Routes.settings}
 										>
 											Settings
 										</Menu.Item>
 									</Link>
+									<Menu.Item position="right">
+										<Icon name="zoom-out" onClick={() => {
+											this.handleZoomClick(true);
+										}} />
+										<Icon name="zoom-in" onClick={() => {
+											this.handleZoomClick(false);
+										}} />
+									</Menu.Item>
 								</Menu>
 							</div>
 						);
