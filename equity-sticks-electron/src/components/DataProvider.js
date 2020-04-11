@@ -23,11 +23,17 @@ class DataProvider extends React.Component {
 				currentClass: null,
 				classes: {},
 				preferences: {
-					idIncrementor: 2,
-					maxTallies: 3
+					idIncrementor: 1,
+					maxTallies: 3,
+					alwaysOnTop: false
 				}
 			};
 		}
+	}
+
+	componentDidUpdate(prevProps){
+		const mainWindow = electron.remote.getCurrentWindow();
+		mainWindow.setAlwaysOnTop(this.state.preferences.alwaysOnTop === true);
 	}
 
 	changeClass = (newClass, callback) => {

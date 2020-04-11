@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Input } from "semantic-ui-react";
+import { Button, Header, Container, Input, Checkbox } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
@@ -34,6 +34,11 @@ class SettingsPage extends React.Component {
 											editPrefs("maxTallies", this.state.newMaxTallies);
 										}} />
 									} />
+									<Header as="h3">Always On Top</Header>
+									<p>Turn on this setting to make the app float on top of other windows.</p>
+									<Checkbox toggle checked={preferences.alwaysOnTop === true} onChange={(e, props) => {
+										editPrefs("alwaysOnTop", preferences.alwaysOnTop !== true);
+									}} />
 								</Container>
 							);
 						}
