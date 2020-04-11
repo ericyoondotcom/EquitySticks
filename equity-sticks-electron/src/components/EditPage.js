@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Form, Input, List, Popup, Dropdown } from "semantic-ui-react";
+import { Button, Header, Container, Form, Input, List, Popup, Dropdown, Message, Icon } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import UploadInstructions from "./UploadInstructions";
@@ -11,6 +11,7 @@ class EditPage extends React.Component {
 		super(props);
 		this.state = {
 			studentsData: [],
+			studentsLoaded: false,
 			loading: false,
 			newNameText: ""
 		};
@@ -30,8 +31,8 @@ class EditPage extends React.Component {
 							}
 							
 							const classData = classes[currentClass];
-							if(this.state.studentsData.length == 0){
-								this.setState({studentsData: classData.students});
+							if(!this.state.studentsLoaded){
+								this.setState({studentsData: classData.students, studentsLoaded: true});
 								return;
 							} 
 							return (
@@ -45,7 +46,7 @@ class EditPage extends React.Component {
 									/>
 
 									<UploadInstructions classDisplayName={classData.displayName} color={classData.color} onUploadFinished={() => {
-										this.setState({studentsData: []});
+										this.setState({studentsLoaded: false});
 									}} />
 									<Popup on="click" wide="very" trigger={
 										<Button labelPosition="left" icon="pencil" content="Edit Name" onClick={() => {
@@ -105,7 +106,18 @@ class EditPage extends React.Component {
 										</div>
 									</Popup>
 									<Header as="h2" className="mt-lg">Students</Header>
-
+									{
+										this.state.studentsData.length === 0 ? (
+											<Message
+													icon="lightbulb"
+													header="No students in class"
+													info
+													content={
+														<span>Add your first student by clicking <b><Icon name="plus" /> Add Student</b>, or import from Didax by clicking <b><Icon name="upload" /> Import Data</b></span>
+													}
+												/>
+										) : null
+									}
 									<List as="ol">
 										
 										{
@@ -133,8 +145,7 @@ class EditPage extends React.Component {
 																		this.setState({studentsData: newData});
 																	}}
 																/>
-																<Form.Button icon="minus" color="red" inverted circular disabled={this.state.studentsData.length === 1} onClick={() => {
-																	if(this.state.studentsData.length === 1) return;
+																<Form.Button icon="minus" color="red" inverted circular onClick={() => {
 																	const newData = this.state.studentsData;
 																	newData.splice(i, 1);
 																	this.setState({studentsData: newData});

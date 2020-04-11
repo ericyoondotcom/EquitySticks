@@ -48,23 +48,7 @@ class ClassesPage extends React.Component {
 												editClass(randomId, {
 													displayName: "My New Class " + preferences.idIncrementor,
 													color: getRandomItem(rsuiColors),
-													students: [
-														{
-															"firstName": "Eric",
-															"lastName": "Yoon",
-															"tallies": 0
-														},
-														{
-															"firstName": "Aariz",
-															"lastName": "Irfan",
-															"tallies": 0
-														},
-														{
-															"firstName": "Rick",
-															"lastName": "Astley",
-															"tallies": 0
-														}
-													]
+													students: []
 												});
 												editPrefs("idIncrementor", preferences.idIncrementor + 1);
 											}} />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Icon, Table } from "semantic-ui-react";
+import { Button, Header, Container, Icon, Table, Message } from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import DataProvider from "./DataProvider";
 import Navbar from "./Navbar";
@@ -65,37 +65,50 @@ export default class TallyPage extends React.Component {
 									<Link to={Routes.edit}>
 										<Button labelPosition="left" icon="edit" content="Edit Class" />
 									</Link>
-									<Table celled unstackable>
-										<Table.Header>
-											<Table.Row>
-												<Table.HeaderCell>Student</Table.HeaderCell>
-												<Table.HeaderCell>Tally</Table.HeaderCell>
-											</Table.Row>
-										</Table.Header>
-										<Table.Body>
-											{
-												classData.students.map((student, i) => {
-													return (
-														<Table.Row key={"student-" + i}>
-															<Table.Cell>
-																<Button icon compact className="mr-md" color={classData.color} circular inverted={student.tallies !== 0} disabled={student.tallies == preferences.maxTallies} onClick={() => {
-																	this.setTally(student.tallies + 1, i, dataCtx);
-																}}>
-																	<Icon name="plus" />
-																</Button>
-																<span className="ui header mr-md" basic primary compact>{student.lastName}, {student.firstName}</span>
-															</Table.Cell>
-															<Table.Cell>
-																{
-																	this.renderTallies(i, dataCtx)
-																}
-															</Table.Cell>
-														</Table.Row>
-													);
-												})
-											}
-										</Table.Body>
-									</Table>
+									{
+										classData.students.length === 0 ? (
+											<Message
+													icon="lightbulb"
+													header="No students in class"
+													info
+													content={
+														<span>Add students in the <b><Icon name="edit" /> Edit Class</b> tab</span>
+													}
+												/>
+										) : (
+											<Table celled unstackable>
+												<Table.Header>
+													<Table.Row>
+														<Table.HeaderCell>Student</Table.HeaderCell>
+														<Table.HeaderCell>Tally</Table.HeaderCell>
+													</Table.Row>
+												</Table.Header>
+												<Table.Body>
+													{
+														classData.students.map((student, i) => {
+															return (
+																<Table.Row key={"student-" + i}>
+																	<Table.Cell>
+																		<Button icon compact className="mr-md" color={classData.color} circular inverted={student.tallies !== 0} disabled={student.tallies == preferences.maxTallies} onClick={() => {
+																			this.setTally(student.tallies + 1, i, dataCtx);
+																		}}>
+																			<Icon name="plus" />
+																		</Button>
+																		<span className="ui header mr-md" basic primary compact>{student.lastName}, {student.firstName}</span>
+																	</Table.Cell>
+																	<Table.Cell>
+																		{
+																			this.renderTallies(i, dataCtx)
+																		}
+																	</Table.Cell>
+																</Table.Row>
+															);
+														})
+													}
+												</Table.Body>
+											</Table>
+										)
+									}
 								</Container>
 							);
 						}
