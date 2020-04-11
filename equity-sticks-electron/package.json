@@ -27,6 +27,9 @@
 			"build/**/*",
 			"node_modules/**/*"
 		],
+		"directories": {
+			"buildResources": "public"
+		},
 		"dmg": {
 			"contents": [
 				{
@@ -76,7 +79,7 @@
 		"electron": "electron .",
 		"electron-start": "node src/start-react",
 		"react-start": "BROWSER=none react-scripts start",
-		"build-electron": "cp src/start.js build/start.js && cp src/icon_windows.ico build/icon_windows.ico",
+		"build-electron": "cp src/start.js build/start.js",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder build --mac --win -c.extraMetadata.main=build/start.js",
 		"deploy": "npm run build && npm run build-electron && npm run dist",

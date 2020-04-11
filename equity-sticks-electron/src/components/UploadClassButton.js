@@ -43,13 +43,15 @@ class UploadClassButton extends React.Component {
 			const file = fs.readFileSync(filePath, "utf8");
 			const lines = file.split("\n");
 			let students = [];
-			for(const line of lines) {
+			for(let i = 1; i < lines.length; i++) {
+				const line = lines[i];
+				if(line.length == 0) continue;
 				const tabSplit = line.split("\t");
 				if(tabSplit.length < 1) continue;
 				let nameBlock = tabSplit[0].trim();
 				nameBlock = nameBlock.replace("*", "");
 				const firstlast = nameBlock.split(",");
-				if(firstlast.length < 2) return;
+				if(firstlast.length < 2) continue;
 				const last = firstlast[0].trim();
 				const first = firstlast[1].trim();
 				students.push({
@@ -58,6 +60,7 @@ class UploadClassButton extends React.Component {
 					tallies: 0
 				});
 			}
+			
 			const newData = classData;
 			newData.students = newData.students.concat(students);
 			console.log(newData.students);
