@@ -53,7 +53,7 @@ class UploadClassButton extends React.Component {
 				const firstlast = nameBlock.split(",");
 				if(firstlast.length < 2) continue;
 				const last = firstlast[0].trim();
-				const first = firstlast[1].trim();
+				const first = firstlast[1].trim().split(" ")[0]; // Scrub middle names by splitting on a space
 				students.push({
 					firstName: first,
 					lastName: last,
