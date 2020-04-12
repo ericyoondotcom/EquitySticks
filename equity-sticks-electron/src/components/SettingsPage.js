@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Container, Input, Checkbox } from "semantic-ui-react";
+import { Button, Header, Container, Input, Checkbox, Segment, Icon } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
@@ -39,6 +39,21 @@ class SettingsPage extends React.Component {
 									<Checkbox toggle checked={preferences.alwaysOnTop === true} onChange={(e, props) => {
 										editPrefs("alwaysOnTop", preferences.alwaysOnTop !== true);
 									}} />
+									<Header as="h3">About</Header>
+									<Header as="h4">
+										<Icon name="code" />
+										<Header.Content>
+										Eric Yoon <span style={{fontWeight: "normal"}}>'23</span>
+										<Header.Subheader>Development</Header.Subheader>
+										</Header.Content>
+									</Header>
+									<Header as="h4">
+										<Icon name="paint brush" />
+										<Header.Content>
+										Aariz Irfan <span style={{fontWeight: "normal"}}>'23</span>
+										<Header.Subheader>Design</Header.Subheader>
+										</Header.Content>
+									</Header>
 								</Container>
 							);
 						}
