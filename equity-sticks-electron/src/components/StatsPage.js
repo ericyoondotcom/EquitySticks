@@ -6,12 +6,62 @@ import DataProvider from "./DataProvider";
 import Navbar from "./Navbar";
 import Routes from "./routes";
 
+const electron = window.require("electron");
+const remote = electron.remote;
+const fs = remote.require("fs");
+
 export default class StatsPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			displayAsNumbers: false
 		};
+	}
+
+	exportData = (history, classData) => {
+		if(history == undefined || history.length == 0){
+			return;
+		}
+		let str = `Student`;
+
+		for(const i of history) {
+			str += `,${moment(i.timestamp).format("MM/DD/Y hh:mm A")}`;
+		}
+		str += "\n";
+		
+		for(const student of classData.students) {
+			str += `"${student.lastName}, ${student.firstName}"`;
+			for(const i of history) {
+				const stu = i.students.find(s => s.firstName == student.firstName && s.lastName == student.lastName);
+				if(stu === undefined){
+					str += `,N/A`;
+					continue;
+				}
+				str += `,${stu.tallies}`;
+			}
+			str += `\n`;
+		}
+
+		remote.dialog.showSaveDialog({
+			title: "Save CSV to...",
+			buttonLabel: "Save",
+			defaultPath: `*/${classData.displayName} Data.csv`,
+			properties: [
+				"createDirectory"
+			],
+			filters: [
+				{ name: "CSV", extensions: ["csv"] }
+			]
+		}).then((res) => {
+			if(res.canceled) {
+				return;
+			}
+
+			fs.writeFile(res.filePath, str, () => {
+				console.log("Export success!");
+			});
+		});
+
 	}
 
 	render() {
@@ -36,9 +86,11 @@ export default class StatsPage extends React.Component {
 							return (
 								<Container>
 									<Header className="mt-md" as="h1">Data & Statistics</Header>
-									<Button labelPosition="left" icon="file excel outline" color={classData.color} content="Export" />
+									<Button labelPosition="left" icon="file excel outline" color={classData.color} content="Export" disabled={classData.history == undefined || classData.history.length == 0} onClick={() => {
+										this.exportData(history, classData);
+									}} />
 									<Popup on="click" wide="very" trigger={
-										<Button labelPosition="left" icon="trash alternate" negative content="Clear Data" />
+										<Button labelPosition="left" icon="trash alternate" negative content="Clear Data" disabled={classData.history == undefined || classData.history.length == 0} />
 									} style={{textAlign: "center"}}>
 										<div>
 											<p><b>Are you sure?</b></p>
@@ -112,7 +164,7 @@ export default class StatsPage extends React.Component {
 																classData.students.map((student, studentIdx) => {
 																	return (
 																		<Table.Row>
-																			<Table.Cell style={{width: "300px"}}>{student.firstName} {student.lastName}</Table.Cell>
+																			<Table.Cell style={{width: "300px"}}>{student.lastName}, {student.firstName}</Table.Cell>
 																			{
 																				history.map((i, idx) => {
 																					const stu = i.students.find(s => s.firstName == student.firstName && s.lastName == student.lastName);
