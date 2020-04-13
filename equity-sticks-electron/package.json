@@ -51,8 +51,17 @@
 			]
 		},
 		"win": {
-			"target": "nsis",
+			"target": {
+				"target": "portable",
+				"arch": [
+					"x64",
+					"ia32"
+				]
+			},
 			"icon": "build/icon_windows.ico"
+		},
+		"nsis": {
+			"oneClick": false
 		}
 	},
 	"dependencies": {
@@ -62,6 +71,7 @@
 		"browserify-fs": "^1.0.0",
 		"electron-debug": "^3.0.1",
 		"fs": "0.0.1-security",
+		"moment": "^2.24.0",
 		"object-path": "^0.11.4",
 		"path": "^0.12.7",
 		"react": "^16.12.0",
@@ -102,8 +112,7 @@
 	},
 	"devDependencies": {
 		"electron": "^8.1.0",
-		"electron-builder": "^22.4.0",
-		"electron-builder-squirrel-windows": "^22.4.0",
+		"electron-builder": "^22.4.1",
 		"eslint": "^6.8.0",
 		"eslint-config-airbnb": "^18.0.1",
 		"eslint-plugin-import": "^2.20.1",

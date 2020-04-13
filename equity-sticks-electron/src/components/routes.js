@@ -2,7 +2,8 @@ const Routes = {
 	tally: "/tally",
 	edit: "/edit",
 	classes: "/classes",
-	settings: "/settings"
+	settings: "/settings",
+	stats: "/stats"
 };
 
 export default Routes;

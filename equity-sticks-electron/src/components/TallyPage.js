@@ -42,7 +42,7 @@ export default class TallyPage extends React.Component {
 				<DataProvider.Consumer>
 					{
 						dataCtx => {
-							const {currentClass, classes, preferences } = dataCtx;
+							const {currentClass, classes, preferences, editClass } = dataCtx;
 							if(currentClass == null || !(currentClass in classes)){
 								window.location.href = "#" + Routes.classes;
 								return;
@@ -58,12 +58,23 @@ export default class TallyPage extends React.Component {
 										subheader={classData.students.length + " student" + (classData.students.length == 1 ? "" : "s")}
 									/>
 									<Button labelPosition="left" icon="refresh" content="Reset All" color={classData.color} onClick={() => {
-										for(let i in classData.students){
-											this.setTally(0, i, dataCtx);
-										}
+										let newData = classData;
+										if(!("history" in classData)) newData.history = [];
+										newData.history.push({
+											timestamp: new Date(),
+											students: JSON.parse(JSON.stringify(classData.students))
+										});
+										editClass(currentClass, newData, () => {
+											for(let i in classData.students){
+												this.setTally(0, i, dataCtx);
+											}
+										});
 									}} />
 									<Link to={Routes.edit}>
 										<Button labelPosition="left" icon="edit" content="Edit Class" />
+									</Link>
+									<Link to={Routes.stats}>
+										<Button labelPosition="left" icon="chart bar" content="View Data" />
 									</Link>
 									{
 										classData.students.length === 0 ? (

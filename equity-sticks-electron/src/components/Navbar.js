@@ -54,7 +54,15 @@ class Navbar extends React.Component {
 														name='Edit'
 														active={activeItem === Routes.edit}
 													>
-														Edit Class
+														Edit
+													</Menu.Item>
+												</Link>
+												<Link to={Routes.stats}>
+													<Menu.Item
+														name='Data'
+														active={activeItem === Routes.stats}
+													>
+														Data
 													</Menu.Item>
 												</Link>
 											</div>

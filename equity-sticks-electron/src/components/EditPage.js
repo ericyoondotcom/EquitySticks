@@ -109,13 +109,13 @@ class EditPage extends React.Component {
 									{
 										this.state.studentsData.length === 0 ? (
 											<Message
-													icon="lightbulb"
-													header="No students in class"
-													info
-													content={
-														<span>Add your first student by clicking <b><Icon name="plus" /> Add Student</b>, or import from Didax by clicking <b><Icon name="upload" /> Import Data</b></span>
-													}
-												/>
+												icon="lightbulb"
+												header="No students in class"
+												info
+												content={
+													<span>Add your first student by clicking <b><Icon name="plus" /> Add Student</b>, or import from Didax by clicking <b><Icon name="upload" /> Import Data</b></span>
+												}
+											/>
 										) : null
 									}
 									<List as="ol">

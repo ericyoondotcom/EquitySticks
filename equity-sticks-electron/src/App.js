@@ -9,6 +9,7 @@ import ClassesPage from "./components/ClassesPage";
 import DataProvider from "./components/DataProvider";
 import Routes from "./components/routes";
 import SettingsPage from "./components/SettingsPage";
+import StatsPage from "./components/StatsPage";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 					<Route path={Routes.edit} component={EditPage} />
 					<Route path={Routes.classes} component={ClassesPage} />
 					<Route path={Routes.settings} component={SettingsPage} />
+					<Route path={Routes.stats} component={StatsPage} />
 				</HashRouter>
 			</div>
 		</DataProvider.DataProvider>
