@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Button, Header, Container, Popup, Table, Message, Icon, Label, Segment } from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import { formatName } from "./const";
 import DataProvider from "./DataProvider";
 import Navbar from "./Navbar";
 import Routes from "./routes";
@@ -18,7 +19,7 @@ export default class StatsPage extends React.Component {
 		};
 	}
 
-	exportData = (history, classData) => {
+	exportData = (history, classData, preferences) => {
 		if(history == undefined || history.length == 0){
 			return;
 		}
@@ -30,7 +31,7 @@ export default class StatsPage extends React.Component {
 		str += "\n";
 		
 		for(const student of classData.students) {
-			str += `"${student.lastName}, ${student.firstName}"`;
+			str += `"${formatName(student.firstName, student.lastName, preferences.nameFormat)}"`;
 			for(const i of history) {
 				const stu = i.students.find(s => s.firstName == student.firstName && s.lastName == student.lastName);
 				if(stu === undefined){
@@ -87,7 +88,7 @@ export default class StatsPage extends React.Component {
 								<Container>
 									<Header className="mt-md" as="h1">Data & Statistics</Header>
 									<Button labelPosition="left" icon="file excel outline" color={classData.color} content="Export" disabled={classData.history == undefined || classData.history.length == 0} onClick={() => {
-										this.exportData(history, classData);
+										this.exportData(history, classData, preferences);
 									}} />
 									<Popup on="click" wide="very" trigger={
 										<Button labelPosition="left" icon="trash alternate" negative content="Clear Data" disabled={classData.history == undefined || classData.history.length == 0} />
@@ -139,7 +140,7 @@ export default class StatsPage extends React.Component {
 																{
 																	history.map((i, idx) => {
 																		return (
-																			<Table.HeaderCell style={{width: "200px", position: "relative"}}>
+																			<Table.HeaderCell key={"header-" + idx} style={{width: "200px", position: "relative"}}>
 																				{moment(i.timestamp).format("MMM D 'YY [at] hh:mma")}
 																				<Popup position="top center" inverted on="hover" trigger={
 																					<span style={{right: "5px", position: "absolute", margin: "auto"}}>
@@ -164,20 +165,22 @@ export default class StatsPage extends React.Component {
 																classData.students.map((student, studentIdx) => {
 																	return (
 																		<Table.Row>
-																			<Table.Cell style={{width: "300px"}}>{student.lastName}, {student.firstName}</Table.Cell>
+																			<Table.Cell key={"namecell-" + studentIdx} style={{width: "300px"}}>
+																				{formatName(student.firstName, student.lastName, preferences.nameFormat)}
+																			</Table.Cell>
 																			{
 																				history.map((i, idx) => {
 																					const stu = i.students.find(s => s.firstName == student.firstName && s.lastName == student.lastName);
 																					if(stu === undefined){
 																						return (
-																							<Table.cell style={{width: "200px"}}>
+																							<Table.cell key={`cell-${studentIdx}-${idx}`} style={{width: "200px"}}>
 																								N/A
 																							</Table.cell>
 																						);
 																					}
 																					if(this.state.displayAsNumbers){
 																						return (
-																							<Table.Cell style={{width: "200px"}}>
+																							<Table.Cell key={`cell-${studentIdx}-${idx}`} style={{width: "200px"}}>
 																								{stu.tallies}
 																							</Table.Cell>
 																						);
@@ -186,11 +189,11 @@ export default class StatsPage extends React.Component {
 																					for (let i = 0; i < dataCtx.preferences.maxTallies; i++) {
 																						const punchedIn = i < stu.tallies;
 																						tallies.push(
-																							<Icon name={punchedIn ? "star" : "star outline"} color={classData.color}/>
+																							<Icon key={`icon-${studentIdx}-${idx}-${i}`} name={punchedIn ? "star" : "star outline"} color={classData.color}/>
 																						);
 																					}
 																					return (
-																						<Table.Cell style={{width: "200px"}}>
+																						<Table.Cell key={`cell-${studentIdx}-${idx}`} style={{width: "200px"}}>
 																							<span style={{fontSize: "20px"}}>{tallies}</span>
 																						</Table.Cell>
 																					);

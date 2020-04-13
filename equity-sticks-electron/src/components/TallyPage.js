@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Header, Container, Icon, Table, Message } from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import { formatName } from "./const";
 import DataProvider from "./DataProvider";
 import Navbar from "./Navbar";
 import Routes from "./routes";
@@ -105,7 +106,7 @@ export default class TallyPage extends React.Component {
 																		}}>
 																			<Icon name="plus" />
 																		</Button>
-																		<span className="ui header mr-md" basic primary compact>{student.lastName}, {student.firstName}</span>
+																		<span className="ui header mr-md" basic primary compact>{formatName(student.firstName, student.lastName, preferences.nameFormat)}</span>
 																	</Table.Cell>
 																	<Table.Cell>
 																		{

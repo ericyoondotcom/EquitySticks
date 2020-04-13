@@ -61,7 +61,7 @@
 			"icon": "build/icon_windows.ico"
 		},
 		"nsis": {
-			"oneClick": false
+			"oneClick": true
 		}
 	},
 	"dependencies": {

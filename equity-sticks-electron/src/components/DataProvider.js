@@ -25,7 +25,8 @@ class DataProvider extends React.Component {
 				preferences: {
 					idIncrementor: 1,
 					maxTallies: 3,
-					alwaysOnTop: false
+					alwaysOnTop: false,
+					nameFormat: 0
 				}
 			};
 		}
