@@ -51,13 +51,7 @@
 			]
 		},
 		"win": {
-			"target": {
-				"target": "portable",
-				"arch": [
-					"x64",
-					"ia32"
-				]
-			},
+			"target": "nsis",
 			"icon": "build/icon_windows.ico"
 		},
 		"nsis": {

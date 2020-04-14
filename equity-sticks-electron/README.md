@@ -1,3 +1,6 @@
+## Download the latest version
+**Downloads have moved from the Releases page to the [download webpage](http://yoonicode.com/equitysticks).**
+
 ## Get Ready for Development
 1. `npm install foreman -g`
 
