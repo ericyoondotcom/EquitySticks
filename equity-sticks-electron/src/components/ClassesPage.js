@@ -3,12 +3,20 @@ import { Header, Button, Container, Popup, Segment, Message, Icon } from "semant
 import Navbar from "./Navbar";
 import Routes from "./routes";
 import DataProvider from "./DataProvider";
-import {getRandomItem, rsuiColors} from "./const";
+import {getRandomItem, rsuiColors, DOWNLOAD_URL} from "./const";
+import {checkForUpdates} from "./updateChecker";
+
+const shell = window.require("electron").shell;
 
 class ClassesPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			showUpdateMessage: false
+		};
+		checkForUpdates().then(updateStatus => {
+			this.setState({showUpdateMessage: updateStatus});
+		})
 	}
 
 	render() {
@@ -23,6 +31,23 @@ class ClassesPage extends React.Component {
 							return (
 								<Container>
 									<Header className="title mt-md" as="h1">My Classes</Header>
+									{
+										this.state.showUpdateMessage ? (
+										<Message
+										style={{cursor: "pointer"}}
+											icon="lightbulb"
+											header="An update is available"
+											info
+											content={
+												<span>A new version is available! Click here to download the latest version.</span>
+											}
+											onClick={(e) => {
+												e.preventDefault();
+												shell.openExternal(DOWNLOAD_URL);
+											}}
+										/>
+										) : null
+									}
 									{
 										Object.keys(classes).map(classId => {
 											const classData = classes[classId];

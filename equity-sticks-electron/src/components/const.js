@@ -1,7 +1,11 @@
+export const CURRENT_VERSION = 8;
+
+export const DOWNLOAD_URL = "http://yoonicode.com/equitysticks";
+export const VERSION_URL = "http://yoonicode.com/equitysticks/version.txt";
+
 export const rsuiColors = [
 	"red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black"
 ];
-
 
 export const nameFormatOptions = [
 	{
