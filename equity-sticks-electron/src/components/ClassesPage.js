@@ -58,6 +58,7 @@ class ClassesPage extends React.Component {
 													});
 												}}>
 													<Header
+														inverted={currentClass === classId}
 														as="h3"
 														content={classData.displayName}
 														subheader={classData.students.length + " student" + (classData.students.length == 1 ? "" : "s")}
