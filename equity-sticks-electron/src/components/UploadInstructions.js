@@ -24,8 +24,11 @@ class UploadInstructions extends React.Component {
 				<div className="p-lg">
 					<Header as="h2" icon="file alternate outline" content="Step 1: Export Students File" />
 					<List ordered>
-						<List.Item>Navigate to the list of students of your {this.props.classDisplayName} class in Didax.</List.Item>
-						<List.Item>Right click and select <b>Export</b> <Icon name="chevron right" style={{display: "inline"}} /> <b>As text file.</b></List.Item>
+						<List.Item>Click on <b>My Classes</b> under the <b>Faculty</b> tab.</List.Item>
+						<List.Item>Double click on the <b>{this.props.classDisplayName}</b> class.</List.Item>
+						<List.Item>Navigate to the <b>Students</b> tab.</List.Item>
+						<List.Item>Right click on the list in an empty space.</List.Item>
+						<List.Item>Select <b>Export List</b> <Icon name="chevron right" style={{display: "inline"}} /> <b>To Text File...</b></List.Item>
 						<List.Item>Save the file to a convienent location, such as your Desktop.</List.Item>
 						<List.Item>Drag and drop or select your file below.</List.Item>
 					</List>

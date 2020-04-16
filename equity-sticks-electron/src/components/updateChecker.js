@@ -14,7 +14,7 @@ export function checkForUpdates(){
 		}
 	
 		const req = new XMLHttpRequest();
-		req.open("GET", VERSION_URL);
+		req.open("GET", VERSION_URL + "?time=" + Date.now());
 
 		req.onreadystatechange = (e) => {
 			if(req.readyState === XMLHttpRequest.DONE) {
