@@ -86,7 +86,8 @@
 		"build-electron": "cp src/start.js build/start.js",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder build --mac --win -c.extraMetadata.main=build/start.js",
-		"deploy": "npm run build && npm run build-electron && npm run dist",
+		"zip": "zip dist/equitysticks-windows.zip \"dist/Equity Sticks Setup 0.1.0.exe\" && zip dist/equitysticks-mac.zip \"dist/Equity Sticks-0.1.0.dmg\"",
+		"deploy": "npm run build && npm run build-electron && npm run dist && npm run zip",
 		"postinstall": "install-app-deps"
 	},
 	"eslintConfig": {

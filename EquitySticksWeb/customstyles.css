@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Mulish&display=swap');
+
 .main_content_area {
     background-color: white;
-    background-image: linear-gradient(to top left, #730020, #2B0040 80%);
-    color: #FFFFFF;
+    color: #000000;
     font-family: "Muli", sans-serif;
     background-attachment: fixed;
     overflow-x: hidden;
@@ -20,7 +21,7 @@
 
 a.custom {
     cursor: pointer;
-    background: linear-gradient(to top left, #FF0000, #FEC400);
+    background: linear-gradient(to top left, #4fe87d, #4fe8c9);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -35,34 +36,37 @@ a.custom:hover {
 }
 
 button.custom {
-    cursor: pointer;
-    font-family: "Muli", sans-serif;
-    padding: 15px;
-    background-image: linear-gradient(to top left, #FF0000, #FEC400);
-    border-color: #FFFFFF;
-    color: white;
-    font-size: 25px;
-    margin: 5px;
-    border-width: 3px;
-    transition: margin .5s, border-width .5s;
-    border-style: solid;
+    background-image: linear-gradient(to top left, #4fe87d, #4fe8c9);
+    background-blend-mode: multiply;
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: #51e8a4 3px solid;
     border-radius: 10em;
+    font-size: 20px;
+    padding: 10px 12px;
+    margin: 5px;
+    transition: background-color .5s, border-width .5s, margin .5s;
+    font-family: "Mulish", sans-serif;
 }
 
 button.custom:hover {
+    background-color: #e7e7ff;
     margin: 0px;
     border-width: 8px;
-    transition: margin .5s, border-width .5s;
+    transition: background-color .5s, border-width .5s, margin .5s;
 }
 
 button.custom:active {
+    background-color: #ccccdd;
     margin: 3px;
     border-width: 5px;
-    transition: margin .1s, border-width .1s;
+    transition: background-color .1s, border-width .1s, margin .1s;
 }
 
 h1.custom, h2.custom, h3.custom, h4.custom, h5.custom, h6.custom {
-    font-family: "Ledger", serif;
+	font-family: "Crete Round", serif;
+	font-weight: normal;
 }
 
 h1.custom {
